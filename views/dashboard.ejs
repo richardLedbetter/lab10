@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+        <script>
+        $(document).ready(function() {
+            // $('#message').hide();
+            $('#logoutButton').on('click', function(e) {
+                // Do not submit until I am ready
+                e.preventDefault();
+                $.ajax({
+                    type: "GET",
+                    url: "/logout",
+                    dataType: "json",
+                    success: function(result, status) {
+                        console.log("got logout status back", result);
+                        if (result.successful) {
+                            // This will navigate to wherever i say...
+                            window.location.href = '/login';
+                        }
+                        else {
+                            // Show an error message or something and stay here
+                            $('#message').html(result.message);
+                            $('#message').show();
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        err = eval("error: (" + xhr.responseText + ")");
+                        console.error(err);
+                    },
+                    complete: function(data, status) { //optional, used for debugging purposes
+                        console.log(status);
+                    }
+                });
+            })
+        });
+    </script>
+    </head>
+    <body class="text-center">
+        
+         <h1 class="display-4"> Admin Section </h1>
+
+        <form action="/addAuthor">
+          <button type="submit" class="btn btn-primary">Add New Author</button>
+        </form>
+        
+        <h3>Authors</h3>
+        
+        <% authorList.forEach(function(author){  %>
+        
+        <ul class="list-group">
+          <li class="list-group-item">[<a href="/updateAuthor?authorId=<%= author.authorId %>">EDIT</a>]
+            [<a href="/deleteAuthor?authorId=<%= author.authorId %>">DELETE</a>] 
+            <%= author.firstName %> <%= author.lastName %> <br></li>
+        </ul>
+        
+        
+        
+        
+        <% }) %>
+        
+        <div>
+            <br><br><button id="logoutButton" class="btn btn-danger">Logout</button>
+        </div>
+        
+        
+        
+    </body>
+</html>
