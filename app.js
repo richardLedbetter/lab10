@@ -282,10 +282,10 @@ function getAuthorList(){
 function dbConnection(){
 
    let conn = mysql.createConnection({
-            host: 'thzz882efnak0xod.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
-            user: 'c229f0xm1hhx3jzi',
-            password: 'c0l7mj611xz54rjv',
-            database: 'etn9bisbqb9stw7v'
+            host: 'gmgcjwawatv599gq.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+            user: 'bhp1to00zjadfjgx',
+            password: 'ctverwyfcygontvb',
+            database: 'k1n5umaw4l2zvlot'
        }); //createConnection
 
 return conn;
